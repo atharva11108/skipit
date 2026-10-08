@@ -1,0 +1,1 @@
+"""Skipti shared service layer used by both REST and MCP."""

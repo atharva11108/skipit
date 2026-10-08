@@ -1,0 +1,15 @@
+services:
+  app:
+    build: .
+    ports:
+      - "3000:8001"
+    env_file: backend/.env
+    environment:
+      DATABASE_BACKEND: supabase
+    healthcheck:
+      test: ["CMD", "python", "-c", "import json, urllib.request; data=json.load(urllib.request.urlopen('http://127.0.0.1:8001/api/health')); assert data['status']=='ready', data"]
+      interval: 30s
+      timeout: 15s
+      start_period: 30s
+      retries: 3
+    restart: unless-stopped
